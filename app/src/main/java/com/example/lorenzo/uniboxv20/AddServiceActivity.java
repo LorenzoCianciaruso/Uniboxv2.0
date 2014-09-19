@@ -19,6 +19,7 @@ public class AddServiceActivity extends Activity {
 
     private ImageButton[] imageButton = new ImageButton[6];
     private User currentUser;
+    private String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class AddServiceActivity extends Activity {
         stringArray[0] = currentUser.getEmail();
         stringArray[1] = currentUser.getAccessToken();
         stringArray[2] = (String) view.getTag();
+        message = stringArray[2];
 
         for(ImageButton i : imageButton){
             i.setEnabled(false);
@@ -75,7 +77,11 @@ public class AddServiceActivity extends Activity {
             @Override
             protected void onPostExecute(String result) {
                if(result != null) {
-                   //chiama WebView
+                   Intent intent = new Intent(AddServiceActivity.this, WebViewActivity.class);
+                   intent.putExtra("url", result);
+                   intent.putExtra("service", message);
+                   intent.putExtra("user", currentUser);
+                   startActivity(intent);
                }
 
             }

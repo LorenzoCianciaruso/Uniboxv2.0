@@ -130,4 +130,20 @@ public class JSONParser {
             return null;
         }
     }
+
+    public static String toJSONGetAccessTokenString(String email, String accessToken, String message, String authCode, String user, String password) {
+        try{
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("email", email);
+            jsonObj.put("accessToken", accessToken);
+            jsonObj.put("message", message);
+            jsonObj.put("authCode", authCode);
+            jsonObj.put("user", user);
+            jsonObj.put("password", password);
+            return jsonObj.toString();
+        }catch(JSONException e){
+            return null;
+        }
+
+    }
 }

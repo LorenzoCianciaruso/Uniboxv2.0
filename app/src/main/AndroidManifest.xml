@@ -31,6 +31,10 @@
             android:label="@string/title_activity_add_service"
             android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar.MinWidth" >
         </activity>
+        <activity
+            android:name=".WebViewActivity"
+            android:label="@string/title_activity_web_view" >
+        </activity>
     </application>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -40,4 +44,3 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
-
