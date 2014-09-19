@@ -146,4 +146,15 @@ public class JSONParser {
         }
 
     }
+
+    public static String toJSONAvailableServicesString(String email, String accessToken) {
+        try{
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("email", email);
+            jsonObj.put("accessToken", accessToken);
+            return jsonObj.toString();
+        }catch(JSONException e){
+            return null;
+        }
+    }
 }

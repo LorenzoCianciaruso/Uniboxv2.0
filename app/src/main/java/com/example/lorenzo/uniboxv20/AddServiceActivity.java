@@ -12,7 +12,10 @@ import android.widget.Toast;
 
 import com.example.lorenzo.uniboxv20.data.User;
 import com.example.lorenzo.uniboxv20.util.AddServiceTask;
+import com.example.lorenzo.uniboxv20.util.AvailableServiceTask;
 import com.example.lorenzo.uniboxv20.util.LoginTask;
+
+import java.util.ArrayList;
 
 
 public class AddServiceActivity extends Activity {
@@ -30,6 +33,39 @@ public class AddServiceActivity extends Activity {
 
         findViewById();
 
+        AvailableServiceTask availableServiceTask = new AvailableServiceTask() {
+
+            @Override
+            protected void onPostExecute(ArrayList<String> availableServices) {
+                for(String i : availableServices) {
+                    if (i.equals("Dropox")) {
+                        imageButton[0].setImageResource(R.drawable.dropbox);
+                        imageButton[0].setEnabled(true);
+                    }
+                    else if (i.equals("Box")) {
+                        imageButton[1].setImageResource(R.drawable.box);
+                        imageButton[1].setEnabled(true);
+                    }
+                    else if (i.equals("Mega")) {
+                        imageButton[2].setImageResource(R.drawable.mega);
+                        imageButton[2].setEnabled(true);
+                    }
+                    else if (i.equals("Facebook")) {
+                        imageButton[3].setImageResource(R.drawable.facebook);
+                        imageButton[3].setEnabled(true);
+                    }
+                    else if (i.equals("Twitter")) {
+                        imageButton[4].setImageResource(R.drawable.twitter);
+                        imageButton[4].setEnabled(true);
+                    }
+                    else if (i.equals("Youtube")) {
+                        imageButton[5].setImageResource(R.drawable.youtube);
+                        imageButton[5].setEnabled(true);
+                    }
+                }
+            }
+        };
+        availableServiceTask.execute(currentUser.getEmail(), currentUser.getAccessToken());
     }
 
 
@@ -59,6 +95,10 @@ public class AddServiceActivity extends Activity {
         imageButton[3] = (ImageButton) findViewById(R.id.imageButton4);
         imageButton[4] = (ImageButton) findViewById(R.id.imageButton5);
         imageButton[5] = (ImageButton) findViewById(R.id.imageButton6);
+
+        for (ImageButton i : imageButton) {
+            i.setEnabled(false);
+        }
     }
 
     public void onClick(View view) {
@@ -69,20 +109,20 @@ public class AddServiceActivity extends Activity {
         stringArray[2] = (String) view.getTag();
         message = stringArray[2];
 
-        for(ImageButton i : imageButton){
+        for (ImageButton i : imageButton) {
             i.setEnabled(false);
         }
 
         AddServiceTask serviceTask = new AddServiceTask() {
             @Override
             protected void onPostExecute(String result) {
-               if(result != null) {
-                   Intent intent = new Intent(AddServiceActivity.this, WebViewActivity.class);
-                   intent.putExtra("url", result);
-                   intent.putExtra("service", message);
-                   intent.putExtra("user", currentUser);
-                   startActivity(intent);
-               }
+                if (result != null) {
+                    Intent intent = new Intent(AddServiceActivity.this, WebViewActivity.class);
+                    intent.putExtra("url", result);
+                    intent.putExtra("service", message);
+                    intent.putExtra("user", currentUser);
+                    startActivity(intent);
+                }
 
             }
         };

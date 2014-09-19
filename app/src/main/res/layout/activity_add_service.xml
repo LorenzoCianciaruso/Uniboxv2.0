@@ -19,13 +19,13 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:weightSum="1"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            >
 
             <ImageButton
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:id="@+id/imageButton"
-                android:background="@drawable/dropbox"
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
                 android:onClick="onClick"
@@ -36,7 +36,6 @@
                 android:layout_width="110dp"
                 android:layout_height="150dp"
                 android:id="@+id/imageButton2"
-                android:background="@drawable/box"
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
                 android:onClick="onClick"
@@ -56,7 +55,6 @@
                 android:layout_width="151dp"
                 android:layout_height="151dp"
                 android:id="@+id/imageButton3"
-                android:background="@drawable/mega"
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
                 android:onClick="onClick"
@@ -66,7 +64,6 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:id="@+id/imageButton4"
-                android:background="@drawable/facebook"
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
                 android:onClick="onClick"
@@ -83,7 +80,6 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:id="@+id/imageButton5"
-                android:background="@drawable/twitter"
                 android:maxWidth="150dp"
                 android:maxHeight="150dp"
                 android:onClick="onClick"
@@ -94,12 +90,12 @@
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:id="@+id/imageButton6"
-                android:background="@drawable/youtube"
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
                 android:onClick="onClick"
                 android:layout_gravity="center"
-                android:tag="youtube"/>
+                android:tag="youtube"
+                android:clickable="false" />
         </LinearLayout>
     </TableLayout>
 </RelativeLayout>
