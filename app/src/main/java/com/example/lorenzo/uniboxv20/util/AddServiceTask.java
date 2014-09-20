@@ -32,7 +32,7 @@ public class AddServiceTask extends AsyncTask <String, Void, String> {
             //TODO da scommentare l'if quando è finito il debug
      //   if(jsonResponseString.contains("true")){
             jsonRequestString = JSONParser.toJSONAddServiceString(email, accessToken, message);
-            jsonResponseString = JSONParser.getJsonStringFromURL(GET_AUTH_URL, jsonRequestString);
+        jsonResponseString = JSONParser.getJsonStringFromURL(GET_AUTH_URL, jsonRequestString);
 
             if(jsonResponseString.contains("http")){
                 jsonResponseString = jsonResponseString.replace("\"", "").replace("\\","");

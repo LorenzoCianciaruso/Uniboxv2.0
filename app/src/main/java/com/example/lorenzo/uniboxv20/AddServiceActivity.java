@@ -1,11 +1,16 @@
 package com.example.lorenzo.uniboxv20;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -13,6 +18,7 @@ import android.widget.Toast;
 import com.example.lorenzo.uniboxv20.data.User;
 import com.example.lorenzo.uniboxv20.util.AddServiceTask;
 import com.example.lorenzo.uniboxv20.util.AvailableServiceTask;
+import com.example.lorenzo.uniboxv20.util.GetAccessTokenTask;
 import com.example.lorenzo.uniboxv20.util.LoginTask;
 
 import java.util.ArrayList;
@@ -46,7 +52,7 @@ public class AddServiceActivity extends Activity {
                         imageButton[1].setImageResource(R.drawable.box);
                         imageButton[1].setEnabled(true);
                     }
-                    else if (i.equals("Mega")) {
+                    else if (i.equals("Facebook")) {
                         imageButton[2].setImageResource(R.drawable.mega);
                         imageButton[2].setEnabled(true);
                     }
@@ -113,20 +119,65 @@ public class AddServiceActivity extends Activity {
             i.setEnabled(false);
         }
 
-        AddServiceTask serviceTask = new AddServiceTask() {
-            @Override
-            protected void onPostExecute(String result) {
-                if (result != null) {
-                    Intent intent = new Intent(AddServiceActivity.this, WebViewActivity.class);
-                    intent.putExtra("url", result);
-                    intent.putExtra("service", message);
-                    intent.putExtra("user", currentUser);
-                    startActivity(intent);
-                }
+        if (message.equals("mega")) {
+            //Preparing views
+            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.dialog_signin, null);
+//layout_root should be the name of the "top-level" layout node in the dialog_layout.xml file.
+            final EditText usernameText = (EditText) layout.findViewById(R.id.username);
+            final EditText passwordText = (EditText) layout.findViewById(R.id.password);
 
-            }
-        };
-        serviceTask.execute(stringArray);
+            //Building dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setView(layout);
+            builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialog, int which) {
+
+                    String user = usernameText.getText().toString();
+                    String password = passwordText.getText().toString();
+
+                    GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask(){
+
+                        @Override
+                        protected void onPostExecute(Boolean result) {
+                            if (result) {
+                                dialog.dismiss();
+                                Intent intent = new Intent(AddServiceActivity.this, NavigatorActivity.class);
+                                intent.putExtra("user", currentUser);
+                                startActivity(intent);
+                            }
+                        }
+                    };
+                    getAccessTokenTask.execute(currentUser.getEmail(),currentUser.getAccessToken(), message, "", user, password);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+        } else {
+
+            AddServiceTask serviceTask = new AddServiceTask() {
+                @Override
+                protected void onPostExecute(String result) {
+                    if (result != null) {
+                        Intent intent = new Intent(AddServiceActivity.this, WebViewActivity.class);
+                        intent.putExtra("url", result);
+                        intent.putExtra("service", message);
+                        intent.putExtra("user", currentUser);
+                        startActivity(intent);
+                    }
+
+                }
+            };
+            serviceTask.execute(stringArray);
+        }
     }
 
 }

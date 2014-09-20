@@ -61,10 +61,55 @@ public class WebViewActivity extends Activity {
                                                    finish();
                                                }
                                            } else if (service.equals("box")) {
+                                               if (originalUrl.contains("localhost")) {
+                                                   String code;
+                                                   String[] splittedString = originalUrl.split("=");
 
-                                           } else if (service.equals("mega")) {
+                                                   code = splittedString[splittedString.length -1];
+
+                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask()
+                                                   {
+                                                       @Override
+                                                       protected void onPostExecute(Boolean response) {
+                                                           if(response){
+                                                               Toast.makeText(WebViewActivity.this, "Access token true", Toast.LENGTH_SHORT).show();
+                                                           }else{
+                                                               Toast.makeText(WebViewActivity.this, "Access token false", Toast.LENGTH_SHORT).show();
+                                                           }
+                                                       }
+                                                   };
+                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code,"","");
+                                                   Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
+                                                   intent.putExtra("user", currentUser);
+                                                   startActivity(intent);
+                                                   finish();
+                                               }
 
                                            } else if (service.equals("facebook")) {
+                                               if (originalUrl.contains("localhost")) {
+                                                   String code;
+                                                   String[] splittedString = originalUrl.split("code");
+
+                                                   code = splittedString[splittedString.length -1];
+                                                   code = code.replaceFirst("=","");
+
+                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask()
+                                                   {
+                                                       @Override
+                                                       protected void onPostExecute(Boolean response) {
+                                                           if(response){
+                                                               Toast.makeText(WebViewActivity.this, "Access token true", Toast.LENGTH_SHORT).show();
+                                                           }else{
+                                                               Toast.makeText(WebViewActivity.this, "Access token false", Toast.LENGTH_SHORT).show();
+                                                           }
+                                                       }
+                                                   };
+                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code,"","");
+                                                   Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
+                                                   intent.putExtra("user", currentUser);
+                                                   startActivity(intent);
+                                                   finish();
+                                               }
 
                                            } else if (service.equals("twitter")) {
 
