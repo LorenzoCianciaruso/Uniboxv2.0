@@ -8,6 +8,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 /**
  * Created by Lorenzo on 18/09/2014.
@@ -157,4 +159,69 @@ public class JSONParser {
             return null;
         }
     }
+
+    public static String toJSONDownloadFileOrLinkString(String email, String accessToken, String remotePath){
+        try{
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("email", email);
+            jsonObj.put("accessToken", accessToken);
+            jsonObj.put("remotePath", remotePath);
+            return jsonObj.toString();
+        }catch(JSONException e){
+            return null;
+        }
+    }
+
+    public static String toJSONUploadFileString(String email, String accessToken, String localPath, String remotePath){
+        try{
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("email", email);
+            jsonObj.put("accessToken", accessToken);
+            jsonObj.put("localPath", localPath);
+            jsonObj.put("remotePath", remotePath);
+            return jsonObj.toString();
+        }catch(JSONException e){
+            return null;
+        }
+    }
+
+    public static String toJSONDeleteFileOrDeleteFolderString(String email, String accessToken, String remotePath){
+        try {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("email", email);
+            jsonObj.put("accessToken", accessToken);
+            jsonObj.put("remotePath", remotePath);
+            return jsonObj.toString();
+        }catch(JSONException e){
+            return null;
+        }
+    }
+
+    public static String toJSONShareBySocialString(String email, String accessToken, String remotePath){
+        try {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("email", email);
+            jsonObj.put("accessToken", accessToken);
+            jsonObj.put("remotePath", remotePath);
+            return jsonObj.toString();
+        }catch(JSONException e){
+            return null;
+        }
+    }
+
+    public static String toJSONShareByEmailString(String email, String accessToken, String remotePath, String[] addresses){
+        try {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("email", email);
+            jsonObj.put("accessToken", accessToken);
+            jsonObj.put("remotePath", remotePath);
+            JSONArray jsonArr = new JSONArray(Arrays.asList(addresses));
+            jsonObj.put("addresses", jsonArr);
+            return jsonObj.toString();
+        }catch(JSONException e){
+            return null;
+        }
+    }
+
+
 }
