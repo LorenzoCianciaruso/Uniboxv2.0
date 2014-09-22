@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class AddServiceActivity extends Activity {
 
-    private ImageButton[] imageButton = new ImageButton[6];
+    private ImageButton[] imageButton = new ImageButton[7];
     private User currentUser;
     private String message;
 
@@ -68,6 +68,10 @@ public class AddServiceActivity extends Activity {
                         imageButton[5].setImageResource(R.drawable.youtube);
                         imageButton[5].setEnabled(true);
                     }
+                    else if(i.equals("OneDrive")){
+                        imageButton[6].setImageResource(R.drawable.onedrive);
+                        imageButton[6].setEnabled(true);
+                    }
                 }
             }
         };
@@ -101,6 +105,7 @@ public class AddServiceActivity extends Activity {
         imageButton[3] = (ImageButton) findViewById(R.id.imageButton4);
         imageButton[4] = (ImageButton) findViewById(R.id.imageButton5);
         imageButton[5] = (ImageButton) findViewById(R.id.imageButton6);
+        imageButton[6] = (ImageButton) findViewById(R.id.imageButton7);
 
         for (ImageButton i : imageButton) {
             i.setEnabled(false);

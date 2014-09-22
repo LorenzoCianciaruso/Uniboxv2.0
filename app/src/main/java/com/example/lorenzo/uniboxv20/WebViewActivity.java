@@ -114,17 +114,58 @@ public class WebViewActivity extends Activity {
                                            } else if (service.equals("twitter")) {
 
                                            } else if (service.equals("youtube")) {
+                                               if (originalUrl.contains("example") && originalUrl.contains("stringa")) {
+                                                   String code;
+                                                   String[] splittedString = originalUrl.split("&");
+                                                   String codeField = splittedString[1];
+                                                   String[] codeFieldSplit = codeField.split("=");
+                                                   code = splittedString[codeFieldSplit.length -1];
 
+                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask()
+                                                   {
+                                                       @Override
+                                                       protected void onPostExecute(Boolean response) {
+                                                           if(response){
+                                                               Toast.makeText(WebViewActivity.this, "Access token true", Toast.LENGTH_SHORT).show();
+                                                           }else{
+                                                               Toast.makeText(WebViewActivity.this, "Access token false", Toast.LENGTH_SHORT).show();
+                                                           }
+                                                       }
+                                                   };
+                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code,"","");
+                                                   Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
+                                                   intent.putExtra("user", currentUser);
+                                                   startActivity(intent);
+                                                   finish();
+                                               }
 
+                                           }else if (service.equals("onedrive")) {
+                                               if (originalUrl.contains("unibox") && originalUrl.contains("code")) {
+                                                   String code;
+                                                   String[] splittedString = originalUrl.split("=");
+                                                   code = splittedString[splittedString.length -1];
+
+                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask()
+                                                   {
+                                                       @Override
+                                                       protected void onPostExecute(Boolean response) {
+                                                           if(response){
+                                                               Toast.makeText(WebViewActivity.this, "Access token true", Toast.LENGTH_SHORT).show();
+                                                           }else{
+                                                               Toast.makeText(WebViewActivity.this, "Access token false", Toast.LENGTH_SHORT).show();
+                                                           }
+                                                       }
+                                                   };
+                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code,"","");
+                                                   Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
+                                                   intent.putExtra("user", currentUser);
+                                                   startActivity(intent);
+                                                   finish();
+                                               }
                                            }
                                        }
                                    }
-
         );
-
-
-
-
         myWebView.loadUrl(url);
     }
 

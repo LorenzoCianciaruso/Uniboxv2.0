@@ -23,8 +23,8 @@
             >
 
             <ImageButton
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="116dp"
+                android:layout_height="116dp"
                 android:id="@+id/imageButton"
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
@@ -33,13 +33,12 @@
                 android:tag="dropbox"/>
 
             <ImageButton
-                android:layout_width="110dp"
-                android:layout_height="150dp"
+                android:layout_width="129dp"
+                android:layout_height="116dp"
                 android:id="@+id/imageButton2"
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
                 android:onClick="onClick"
-                android:layout_weight="0.53"
                 android:layout_gravity="right"
                 android:tag="box"/>
         </LinearLayout>
@@ -52,8 +51,8 @@
             android:layout_marginBottom="10dp">
 
             <ImageButton
-                android:layout_width="151dp"
-                android:layout_height="151dp"
+                android:layout_width="127dp"
+                android:layout_height="127dp"
                 android:id="@+id/imageButton3"
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
@@ -61,8 +60,8 @@
                 android:tag="mega"/>
 
             <ImageButton
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:id="@+id/imageButton4"
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
@@ -77,8 +76,8 @@
             android:gravity="center_horizontal">
 
             <ImageButton
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="127dp"
+                android:layout_height="127dp"
                 android:id="@+id/imageButton5"
                 android:maxWidth="150dp"
                 android:maxHeight="150dp"
@@ -87,8 +86,8 @@
                 android:tag="twitter"/>
 
             <ImageButton
-                android:layout_width="150dp"
-                android:layout_height="100dp"
+                android:layout_width="131dp"
+                android:layout_height="87dp"
                 android:id="@+id/imageButton6"
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
@@ -96,6 +95,27 @@
                 android:layout_gravity="center"
                 android:tag="youtube"
                 android:clickable="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:weightSum="1"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/linearLayout">
+
+            <ImageButton
+                android:layout_width="116dp"
+                android:layout_height="116dp"
+                android:id="@+id/imageButton7"
+                android:maxHeight="150dp"
+                android:maxWidth="150dp"
+                android:onClick="onClick"
+                android:layout_gravity="left"
+                android:tag="onedrive" />
+
         </LinearLayout>
     </TableLayout>
 </RelativeLayout>
