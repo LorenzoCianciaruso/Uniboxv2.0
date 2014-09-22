@@ -223,5 +223,16 @@ public class JSONParser {
         }
     }
 
+    public static String toJSONSpaceInfoOrBrokenConnectionsString(String email, String accessToken){
+        try{
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("email", email);
+            jsonObj.put("accessToken", accessToken);
+            return jsonObj.toString();
+        }catch(JSONException e){
+            return null;
+        }
+    }
+
 
 }

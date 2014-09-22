@@ -25,24 +25,11 @@ public class SpaceLeftTask extends AsyncTask<String, Void, ArrayList<String>> {
         String email = strings[0];
         String accessToken = strings[1];
 
-        jsonRequestString = JSONParser.toJSONAvailableServicesString(email, accessToken);
+        jsonRequestString = JSONParser.toJSONSpaceInfoOrBrokenConnectionsString(email, accessToken);
         jsonResponseString = JSONParser.getJsonStringFromURL(AVAILABLE_SERVICES, jsonRequestString);
 
-        try {
-            jsonList = new JSONArray(jsonResponseString);
-        } catch (Exception e) {
-            Log.e("Buffer Error", "Error converting result " + e.toString());
-        }
-
-        if(jsonList != null) {
-            try {
-                for (int i = 0; i < jsonList.length(); i++) {
-                    spaceLeft.add(jsonList.getString(i));
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+       // if (josn)
+        //TODO restituire struttura dati
         return spaceLeft;
     }
 }
