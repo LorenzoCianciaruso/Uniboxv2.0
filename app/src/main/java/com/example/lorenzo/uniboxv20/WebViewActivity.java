@@ -60,6 +60,7 @@ public class WebViewActivity extends Activity {
                                                    finish();
                                                }
                                            } else if (service.equals("box")) {
+                                               //problema localhost
                                                if (originalUrl.contains("localhost")) {
                                                    String code;
                                                    String[] splittedString = originalUrl.split("=");
@@ -84,7 +85,7 @@ public class WebViewActivity extends Activity {
                                                }
 
                                            } else if (service.equals("facebook")) {
-                                               if (originalUrl.contains("localhost")) {
+                                               if (originalUrl.contains("code")) {
                                                    String code;
                                                    String[] splittedString = originalUrl.split("code");
 
@@ -111,7 +112,7 @@ public class WebViewActivity extends Activity {
                                            } else if (service.equals("twitter")) {
 
                                            } else if (service.equals("youtube")) {
-                                               if (originalUrl.contains("example") && originalUrl.contains("stringa")) {
+                                               if (originalUrl.contains("www.example.com/oauth2callback?state=stringa&code=")) {
                                                    String code;
                                                    String[] splittedString = originalUrl.split("&");
                                                    String codeField = splittedString[splittedString.length - 1];
