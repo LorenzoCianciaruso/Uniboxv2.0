@@ -1,18 +1,23 @@
 package com.example.lorenzo.uniboxv20;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.lorenzo.uniboxv20.data.User;
+import com.example.lorenzo.uniboxv20.util.CreateFolderTask;
 import com.example.lorenzo.uniboxv20.util.DirectoryListAdapter;
+import com.example.lorenzo.uniboxv20.util.GetAccessTokenTask;
 import com.example.lorenzo.uniboxv20.util.GetDirectoryListTask;
 
 import java.util.ArrayList;
@@ -38,7 +43,11 @@ public class NavigatorActivity extends Activity {
         GetDirectoryListTask task = new GetDirectoryListTask(currentUser) {
             @Override
             protected void onPostExecute(ArrayList<String> strings) {
-
+                try {
+                    Toast.makeText(NavigatorActivity.this, strings.get(0), Toast.LENGTH_SHORT).show();
+                }catch (IndexOutOfBoundsException e){
+                    Toast.makeText(NavigatorActivity.this, "null", Toast.LENGTH_SHORT).show();
+                }
                 dirList = strings;
                 setListAdapter();
             }
@@ -71,6 +80,7 @@ public class NavigatorActivity extends Activity {
                         @Override
                         protected void onPostExecute(ArrayList<String> strings) {
                             dirList = strings;
+
                             setListAdapter();
                         }
                     };
@@ -116,7 +126,7 @@ public class NavigatorActivity extends Activity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -128,6 +138,51 @@ public class NavigatorActivity extends Activity {
             Intent intent = new Intent(this, AddServiceActivity.class);
             intent.putExtra("user", currentUser);
             startActivity(intent);
+        }
+        if (id == R.id.uploadFile) {
+            Intent intent = new Intent(this, FileExploreActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.createFolder) {
+
+            //Preparing views
+            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.dialog_foldername, null);
+//layout_root should be the name of the "top-level" layout node in the dialog_layout.xml file.
+            final EditText nameText = (EditText) layout.findViewById(R.id.nameText);
+
+            //Building dialog
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setView(layout);
+
+            builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialog, int which) {
+                    final String name = nameText.getText().toString();
+
+                   CreateFolderTask createFolderTask = new CreateFolderTask(){
+                       @Override
+                        protected  void onPostExecute(Boolean result){
+                           if(result){
+                               Toast.makeText(NavigatorActivity.this, "folder created", Toast.LENGTH_SHORT).show();
+                           }else{
+                               Toast.makeText(NavigatorActivity.this, "false", Toast.LENGTH_SHORT).show();
+                           }
+                       }
+                   };
+
+                    createFolderTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), currentPath, name);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog dialog1 = builder.create();
+            dialog1.show();
         }
         return super.onOptionsItemSelected(item);
     }

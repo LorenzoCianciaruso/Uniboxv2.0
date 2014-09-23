@@ -43,7 +43,11 @@ public class AddServiceActivity extends Activity {
 
             @Override
             protected void onPostExecute(ArrayList<String> availableServices) {
-
+                try {
+                    Toast.makeText(AddServiceActivity.this, availableServices.get(0), Toast.LENGTH_SHORT).show();
+                }catch (IndexOutOfBoundsException e){
+                    Toast.makeText(AddServiceActivity.this, "null", Toast.LENGTH_SHORT).show();
+                }
 
                 if (availableServices.contains("Dropbox")) {
                     imageButton[0].setImageResource(R.drawable.dropbox);
@@ -140,22 +144,33 @@ public class AddServiceActivity extends Activity {
                 @Override
                 public void onClick(final DialogInterface dialog, int which) {
 
-                    String user = usernameText.getText().toString();
-                    String password = passwordText.getText().toString();
+                    final String user = usernameText.getText().toString();
+                    final String password = passwordText.getText().toString();
 
-                    GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
-
+                    AddServiceTask addServiceTask = new AddServiceTask() {
                         @Override
-                        protected void onPostExecute(Boolean result) {
-                            if (result) {
-                                dialog.dismiss();
-                                Intent intent = new Intent(AddServiceActivity.this, NavigatorActivity.class);
-                                intent.putExtra("user", currentUser);
-                                startActivity(intent);
-                            }
+                        protected void onPostExecute(String string) {
+
+                                GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
+
+                                    @Override
+                                    protected void onPostExecute(Boolean result1) {
+                                        if (result1) {
+                                            Toast.makeText(AddServiceActivity.this, "AccToken mega OK", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                            Intent intent = new Intent(AddServiceActivity.this, NavigatorActivity.class);
+                                            intent.putExtra("user", currentUser);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(AddServiceActivity.this, "false", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                };
+                                getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), message, "", user, password);
                         }
                     };
-                    getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), message, "", user, password);
+                    addServiceTask.execute(currentUser.getEmail(),currentUser.getAccessToken(),message);
+
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
