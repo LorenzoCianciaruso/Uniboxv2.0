@@ -1,7 +1,12 @@
 package com.example.lorenzo.uniboxv20;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -11,6 +16,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.SocketException;
-
-import org.apache.commons.net.ftp.FTP;
-import org.apache.commons.net.ftp.FTPClient;
+import static org.apache.http.util.EntityUtils.toByteArray;
 
 
 public class FileExploreActivity extends Activity {
@@ -206,34 +206,23 @@ public class FileExploreActivity extends Activity {
                         // File picked
                         else {
                         System.out.println(path+chosenFile);
-
-                            /*
-                            DA SISTEMARE APPENA ABBIAMO L'API
-                            FTPClient mFTP = new FTPClient();
-        try {
-            // Connect to FTP Server
-            mFTP.connect("192.168.1.110");
-            mFTP.login("user", "password");
-            mFTP.setFileType(FTP.BINARY_FILE_TYPE);
-            mFTP.enterLocalPassiveMode();
-
-            // Prepare file to be uploaded to FTP Server
-            File file = new File("/path/to/filetotranfer");
-            FileInputStream ifile = new FileInputStream(file);
-
-            // Upload file to FTP Server
-            mFTP.storeFile("filetotranfer",ifile);
-            mFTP.disconnect();
-        } catch (SocketException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-                            */
+                            //TODO verificare il path
+                            File file = new File(path);
+                            int size = (int) file.length();
+                            byte[] bytes = new byte[size];
+                            try {
+                                BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+                                buf.read(bytes, 0, bytes.length);
+                                buf.close();
+                            } catch (FileNotFoundException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                            Base64.encode(bytes, Base64.DEFAULT);
                         }
-
                     }
                 });
                 break;
