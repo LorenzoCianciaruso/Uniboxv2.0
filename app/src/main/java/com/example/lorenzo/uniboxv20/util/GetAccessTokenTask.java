@@ -13,6 +13,7 @@ public class GetAccessTokenTask extends AsyncTask<String, Void, Boolean> {
     private String jsonRequestString = "";
     private String jsonResponseString = "";
     private JSONObject jObject;
+
     @Override
     protected Boolean doInBackground(String... strings) {
         String email = strings[0];
@@ -25,7 +26,7 @@ public class GetAccessTokenTask extends AsyncTask<String, Void, Boolean> {
         jsonRequestString = JSONParser.toJSONGetAccessTokenString(email, accessToken, message, authCode, user, password);
         jsonResponseString = JSONParser.getJsonStringFromURL(GET_ACC_TOKEN, jsonRequestString);
 
-        if(jsonRequestString.contains("true")){
+        if (jsonResponseString.contains("true")) {
             return true;
         }
         return false;

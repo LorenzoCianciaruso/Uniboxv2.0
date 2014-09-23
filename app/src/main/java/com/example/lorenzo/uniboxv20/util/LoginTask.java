@@ -38,20 +38,20 @@ public class LoginTask extends AsyncTask<String[], Void, User> {
         }
 
         // Creo un oggetto User
-        try{
+        try {
             // prendo la stringa nell'array message
             JSONArray messages = jObject.getJSONArray("message");
             String mex = messages.get(0).toString();
 
             // Se il messaggio non è di errore creo l'utente
-            if(!mex.equals("Error: Login Failed")) {
+            if (!mex.equals("Error: Login Failed")) {
                 user = new User();
                 user.setAccessToken(jObject.getString("accessToken"));
                 user.setName(jObject.getString("name"));
                 user.setSurname((jObject.getString("surname")));
 
                 user.setEmail(credentials[0]); // l'email la prendo dall'input dell'utente
-            }else{
+            } else {
                 return null;
             }
 

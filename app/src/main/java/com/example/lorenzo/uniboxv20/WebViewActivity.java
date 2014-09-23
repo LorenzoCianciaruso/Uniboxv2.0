@@ -43,18 +43,17 @@ public class WebViewActivity extends Activity {
 
                                            if (service.equals("dropbox")) {
                                                if (originalUrl.contains("authorize_submit")) {
-                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask()
-                                                   {
+                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
                                                        @Override
                                                        protected void onPostExecute(Boolean response) {
-                                                           if(response){
+                                                           if (response) {
                                                                Toast.makeText(WebViewActivity.this, "Access token true", Toast.LENGTH_SHORT).show();
-                                                           }else{
+                                                           } else {
                                                                Toast.makeText(WebViewActivity.this, "Access token false", Toast.LENGTH_SHORT).show();
                                                            }
                                                        }
                                                    };
-                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, "","","");
+                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, "", "", "");
                                                    Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
                                                    intent.putExtra("user", currentUser);
                                                    startActivity(intent);
@@ -65,20 +64,19 @@ public class WebViewActivity extends Activity {
                                                    String code;
                                                    String[] splittedString = originalUrl.split("=");
 
-                                                   code = splittedString[splittedString.length -1];
+                                                   code = splittedString[splittedString.length - 1];
 
-                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask()
-                                                   {
+                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
                                                        @Override
                                                        protected void onPostExecute(Boolean response) {
-                                                           if(response){
+                                                           if (response) {
                                                                Toast.makeText(WebViewActivity.this, "Access token true", Toast.LENGTH_SHORT).show();
-                                                           }else{
+                                                           } else {
                                                                Toast.makeText(WebViewActivity.this, "Access token false", Toast.LENGTH_SHORT).show();
                                                            }
                                                        }
                                                    };
-                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code,"","");
+                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code, "", "");
                                                    Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
                                                    intent.putExtra("user", currentUser);
                                                    startActivity(intent);
@@ -90,21 +88,20 @@ public class WebViewActivity extends Activity {
                                                    String code;
                                                    String[] splittedString = originalUrl.split("code");
 
-                                                   code = splittedString[splittedString.length -1];
-                                                   code = code.replaceFirst("=","");
+                                                   code = splittedString[splittedString.length - 1];
+                                                   code = code.replaceFirst("=", "");
 
-                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask()
-                                                   {
+                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
                                                        @Override
                                                        protected void onPostExecute(Boolean response) {
-                                                           if(response){
+                                                           if (response) {
                                                                Toast.makeText(WebViewActivity.this, "Access token true", Toast.LENGTH_SHORT).show();
-                                                           }else{
+                                                           } else {
                                                                Toast.makeText(WebViewActivity.this, "Access token false", Toast.LENGTH_SHORT).show();
                                                            }
                                                        }
                                                    };
-                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code,"","");
+                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code, "", "");
                                                    Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
                                                    intent.putExtra("user", currentUser);
                                                    startActivity(intent);
@@ -119,44 +116,42 @@ public class WebViewActivity extends Activity {
                                                    String[] splittedString = originalUrl.split("&");
                                                    String codeField = splittedString[1];
                                                    String[] codeFieldSplit = codeField.split("=");
-                                                   code = splittedString[codeFieldSplit.length -1];
+                                                   code = splittedString[codeFieldSplit.length - 1];
 
-                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask()
-                                                   {
+                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
                                                        @Override
                                                        protected void onPostExecute(Boolean response) {
-                                                           if(response){
+                                                           if (response) {
                                                                Toast.makeText(WebViewActivity.this, "Access token true", Toast.LENGTH_SHORT).show();
-                                                           }else{
+                                                           } else {
                                                                Toast.makeText(WebViewActivity.this, "Access token false", Toast.LENGTH_SHORT).show();
                                                            }
                                                        }
                                                    };
-                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code,"","");
+                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code, "", "");
                                                    Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
                                                    intent.putExtra("user", currentUser);
                                                    startActivity(intent);
                                                    finish();
                                                }
 
-                                           }else if (service.equals("onedrive")) {
+                                           } else if (service.equals("onedrive")) {
                                                if (originalUrl.contains("unibox") && originalUrl.contains("code")) {
                                                    String code;
                                                    String[] splittedString = originalUrl.split("=");
-                                                   code = splittedString[splittedString.length -1];
+                                                   code = splittedString[splittedString.length - 1];
 
-                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask()
-                                                   {
+                                                   GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
                                                        @Override
                                                        protected void onPostExecute(Boolean response) {
-                                                           if(response){
+                                                           if (response) {
                                                                Toast.makeText(WebViewActivity.this, "Access token true", Toast.LENGTH_SHORT).show();
-                                                           }else{
+                                                           } else {
                                                                Toast.makeText(WebViewActivity.this, "Access token false", Toast.LENGTH_SHORT).show();
                                                            }
                                                        }
                                                    };
-                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code,"","");
+                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code, "", "");
                                                    Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
                                                    intent.putExtra("user", currentUser);
                                                    startActivity(intent);

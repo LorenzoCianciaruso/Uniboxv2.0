@@ -36,7 +36,7 @@ public class DirectoryListAdapter extends ArrayAdapter<String> {
         }
 
         String item = getItem(position);
-        if(item != null){
+        if (item != null) {
 
             TextView dirTextView = (TextView) view
                     .findViewById(R.id.listTextView);
@@ -48,15 +48,15 @@ public class DirectoryListAdapter extends ArrayAdapter<String> {
             }
 
             // setto l'immagine
-            if(deleteBtn != null){
-                if(item.equals("Back")){
+            if (deleteBtn != null) {
+                if (item.equals("Back")) {
                     deleteBtn.setVisibility(View.GONE);
                     return view;
                 }
                 deleteBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ((NavigatorActivity)context).onDeleteButtonClick(position);
+                        ((NavigatorActivity) context).onDeleteButtonClick(position);
                     }
                 });
             }

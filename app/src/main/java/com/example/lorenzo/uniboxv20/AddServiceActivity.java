@@ -43,37 +43,38 @@ public class AddServiceActivity extends Activity {
 
             @Override
             protected void onPostExecute(ArrayList<String> availableServices) {
-                for(String i : availableServices) {
-                    if (i.equals("Dropox")) {
-                        imageButton[0].setImageResource(R.drawable.dropbox);
-                        imageButton[0].setEnabled(true);
-                    }
-                    else if (i.equals("Box")) {
-                        imageButton[1].setImageResource(R.drawable.box);
-                        imageButton[1].setEnabled(true);
-                    }
-                    else if (i.equals("Facebook")) {
-                        imageButton[2].setImageResource(R.drawable.mega);
-                        imageButton[2].setEnabled(true);
-                    }
-                    else if (i.equals("Facebook")) {
-                        imageButton[3].setImageResource(R.drawable.facebook);
-                        imageButton[3].setEnabled(true);
-                    }
-                    else if (i.equals("Twitter")) {
-                        imageButton[4].setImageResource(R.drawable.twitter);
-                        imageButton[4].setEnabled(true);
-                    }
-                    else if (i.equals("Youtube")) {
-                        imageButton[5].setImageResource(R.drawable.youtube);
-                        imageButton[5].setEnabled(true);
-                    }
-                    else if(i.equals("OneDrive")){
-                        imageButton[6].setImageResource(R.drawable.onedrive);
-                        imageButton[6].setEnabled(true);
-                    }
+
+
+                if (availableServices.contains("Dropbox")) {
+                    imageButton[0].setImageResource(R.drawable.dropbox);
+                    imageButton[0].setEnabled(true);
+                }
+                if (availableServices.contains("Box")) {
+                    imageButton[1].setImageResource(R.drawable.box);
+                    imageButton[1].setEnabled(true);
+                }
+                if (availableServices.contains("Mega")) {
+                    imageButton[2].setImageResource(R.drawable.mega);
+                    imageButton[2].setEnabled(true);
+                }
+                if (availableServices.contains("Facebook")) {
+                    imageButton[3].setImageResource(R.drawable.facebook);
+                    imageButton[3].setEnabled(true);
+                }
+                if (availableServices.contains("Twitter")) {
+                    imageButton[4].setImageResource(R.drawable.twitter);
+                    imageButton[4].setEnabled(true);
+                }
+                if (availableServices.contains("Youtube")) {
+                    imageButton[5].setImageResource(R.drawable.youtube);
+                    imageButton[5].setEnabled(true);
+                }
+                if (availableServices.contains("OneDrive")) {
+                    imageButton[6].setImageResource(R.drawable.onedrive);
+                    imageButton[6].setEnabled(true);
                 }
             }
+
         };
         availableServiceTask.execute(currentUser.getEmail(), currentUser.getAccessToken());
     }
@@ -142,7 +143,7 @@ public class AddServiceActivity extends Activity {
                     String user = usernameText.getText().toString();
                     String password = passwordText.getText().toString();
 
-                    GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask(){
+                    GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
 
                         @Override
                         protected void onPostExecute(Boolean result) {
@@ -154,7 +155,7 @@ public class AddServiceActivity extends Activity {
                             }
                         }
                     };
-                    getAccessTokenTask.execute(currentUser.getEmail(),currentUser.getAccessToken(), message, "", user, password);
+                    getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), message, "", user, password);
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

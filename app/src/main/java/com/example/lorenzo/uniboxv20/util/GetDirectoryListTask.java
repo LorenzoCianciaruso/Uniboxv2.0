@@ -25,7 +25,7 @@ public class GetDirectoryListTask extends AsyncTask<String, Void, ArrayList<Stri
     private InputStream is = null;
     private JSONArray jsonList;
 
-    public GetDirectoryListTask(User u){
+    public GetDirectoryListTask(User u) {
         this.user = u;
     }
 
@@ -43,7 +43,7 @@ public class GetDirectoryListTask extends AsyncTask<String, Void, ArrayList<Stri
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
 
-        if(jsonList !=null) {
+        if (jsonList != null) {
             try {
                 for (int i = 0; i < jsonList.length(); i++) {
                     dirList.add(jsonList.getString(i));

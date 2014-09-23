@@ -35,7 +35,7 @@ public class NavigatorActivity extends Activity {
         listView = (ListView) findViewById(R.id.listView);
 
         currentUser = (User) getIntent().getExtras().getSerializable("user");
-        GetDirectoryListTask task = new GetDirectoryListTask(currentUser){
+        GetDirectoryListTask task = new GetDirectoryListTask(currentUser) {
             @Override
             protected void onPostExecute(ArrayList<String> strings) {
 
@@ -50,7 +50,7 @@ public class NavigatorActivity extends Activity {
     private void setListAdapter() {
 
         // Se sto visitando la radice non serve il Back, quindi non lo aggiungo
-        if (!currentPath.equals("/")){
+        if (!currentPath.equals("/")) {
             dirList.add(0, "Back");
         }
 
@@ -64,9 +64,9 @@ public class NavigatorActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 // Se ho cliccato su Back
-                if(adapterView.getItemAtPosition(position).toString().equals("Back")){
+                if (adapterView.getItemAtPosition(position).toString().equals("Back")) {
 
-                    GetDirectoryListTask backTask = new GetDirectoryListTask(currentUser){
+                    GetDirectoryListTask backTask = new GetDirectoryListTask(currentUser) {
 
                         @Override
                         protected void onPostExecute(ArrayList<String> strings) {
@@ -78,12 +78,12 @@ public class NavigatorActivity extends Activity {
                     // tolgo da currentPath l'ultima directory
                     String[] splittedString = currentPath.split("/");
                     currentPath = "";
-                    for(int i=0; i<splittedString.length - 2; i++){
-                        currentPath += splittedString[i]+"/";
+                    for (int i = 0; i < splittedString.length - 2; i++) {
+                        currentPath += splittedString[i] + "/";
                     }
                     backTask.execute(currentPath);
 
-                }else {
+                } else {
 
                     GetDirectoryListTask t = new GetDirectoryListTask(currentUser) {
 
@@ -102,7 +102,7 @@ public class NavigatorActivity extends Activity {
         });
     }
 
-    public void onDeleteButtonClick(int position){
+    public void onDeleteButtonClick(int position) {
         // TODO implementare il Delete di un file/directory
         Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
     }
@@ -124,14 +124,13 @@ public class NavigatorActivity extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
-        if (id == R.id.action_add_service){
+        if (id == R.id.action_add_service) {
             Intent intent = new Intent(this, AddServiceActivity.class);
             intent.putExtra("user", currentUser);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

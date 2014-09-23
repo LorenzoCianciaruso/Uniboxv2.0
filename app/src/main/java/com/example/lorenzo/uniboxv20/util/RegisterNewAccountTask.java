@@ -39,19 +39,19 @@ public class RegisterNewAccountTask extends AsyncTask<String[], Void, User> {
         }
 
         // Creo un oggetto User
-        try{
+        try {
             // prendo la stringa nell'array message
             JSONArray messages = jObject.getJSONArray("message");
             String mex = messages.get(0).toString();
 
             // Se il messaggio non è di errore creo l'utente
-            if(!mex.equals("Email is already used, choose another one")) {
+            if (!mex.equals("Email is already used, choose another one")) {
                 user = new User();
                 user.setAccessToken(jObject.getString("accessToken"));
                 user.setName(jObject.getString("name"));
                 user.setSurname((jObject.getString("surname")));
                 user.setEmail((jObject.getString("email")));
-            }else{
+            } else {
                 return null;
             }
 

@@ -26,7 +26,7 @@ public class BrokeConnectionTask extends AsyncTask<String, Void, ArrayList<Strin
         String email = strings[0];
         String accessToken = strings[1];
 
-        jsonRequestString = JSONParser.toJSONAvailableServicesString(email, accessToken);
+        jsonRequestString = JSONParser.toJSONSpaceInfoOrBrokenConnectionsString(email, accessToken);
         jsonResponseString = JSONParser.getJsonStringFromURL(AVAILABLE_SERVICES, jsonRequestString);
 
         try {

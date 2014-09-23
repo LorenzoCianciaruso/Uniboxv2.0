@@ -23,7 +23,7 @@ import java.util.Arrays;
  * Created by Lorenzo on 18/09/2014.
  */
 public class JSONParser {
-    public static String getJsonStringFromURL(String url, String jsonRequestString){
+    public static String getJsonStringFromURL(String url, String jsonRequestString) {
 
         InputStream is = null;
 
@@ -62,79 +62,79 @@ public class JSONParser {
             is.close();
             return sb.toString();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
         return null;
     }
 
-    public static String toJSONLoginString(String email, String password){
+    public static String toJSONLoginString(String email, String password) {
         try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
             jsonObj.put("password", password);
 
-            return  jsonObj.toString();
+            return jsonObj.toString();
 
-        }catch (JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }
 
-    public static String toJSONGetDirectoryListString(String email, String accessToken, String path){
+    public static String toJSONGetDirectoryListString(String email, String accessToken, String path) {
         try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
             jsonObj.put("accessToken", accessToken);
             jsonObj.put("remotePath", path);
 
-            return  jsonObj.toString();
+            return jsonObj.toString();
 
-        }catch (JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }
 
-    public static String toJSONRegisterNewAccountString(String email, String password, String name, String surname){
-        try{
+    public static String toJSONRegisterNewAccountString(String email, String password, String name, String surname) {
+        try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
             jsonObj.put("password", password);
             jsonObj.put("name", name);
             jsonObj.put("surname", surname);
             return jsonObj.toString();
-        }catch(JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }
 
-    public static String toJSONCreateFolderString(String email, String accessToken, String remotePath, String folderName){
-        try{
+    public static String toJSONCreateFolderString(String email, String accessToken, String remotePath, String folderName) {
+        try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
             jsonObj.put("accessToken", accessToken);
             jsonObj.put("folderName", folderName);
             jsonObj.put("remotePath", remotePath);
             return jsonObj.toString();
-        }catch(JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }
 
     public static String toJSONAddServiceString(String email, String accessToken, String message) {
-        try{
+        try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
             jsonObj.put("accessToken", accessToken);
             jsonObj.put("message", message);
             return jsonObj.toString();
-        }catch(JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }
 
     public static String toJSONGetAccessTokenString(String email, String accessToken, String message, String authCode, String user, String password) {
-        try{
+        try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
             jsonObj.put("accessToken", accessToken);
@@ -143,73 +143,73 @@ public class JSONParser {
             jsonObj.put("user", user);
             jsonObj.put("password", password);
             return jsonObj.toString();
-        }catch(JSONException e){
+        } catch (JSONException e) {
             return null;
         }
 
     }
 
     public static String toJSONAvailableServicesString(String email, String accessToken) {
-        try{
+        try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
             jsonObj.put("accessToken", accessToken);
             return jsonObj.toString();
-        }catch(JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }
 
-    public static String toJSONDownloadFileOrLinkString(String email, String accessToken, String remotePath){
-        try{
+    public static String toJSONDownloadFileOrLinkString(String email, String accessToken, String remotePath) {
+        try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
             jsonObj.put("accessToken", accessToken);
             jsonObj.put("remotePath", remotePath);
             return jsonObj.toString();
-        }catch(JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }
 
-    public static String toJSONUploadFileString(String email, String accessToken, String localPath, String remotePath){
-        try{
+    public static String toJSONUploadFileString(String email, String accessToken, String localPath, String remotePath) {
+        try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
             jsonObj.put("accessToken", accessToken);
             jsonObj.put("localPath", localPath);
             jsonObj.put("remotePath", remotePath);
             return jsonObj.toString();
-        }catch(JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }
 
-    public static String toJSONDeleteFileOrDeleteFolderString(String email, String accessToken, String remotePath){
+    public static String toJSONDeleteFileOrDeleteFolderString(String email, String accessToken, String remotePath) {
         try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
             jsonObj.put("accessToken", accessToken);
             jsonObj.put("remotePath", remotePath);
             return jsonObj.toString();
-        }catch(JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }
 
-    public static String toJSONShareBySocialString(String email, String accessToken, String remotePath){
+    public static String toJSONShareBySocialString(String email, String accessToken, String remotePath) {
         try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
             jsonObj.put("accessToken", accessToken);
             jsonObj.put("remotePath", remotePath);
             return jsonObj.toString();
-        }catch(JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }
 
-    public static String toJSONShareByEmailString(String email, String accessToken, String remotePath, String[] addresses){
+    public static String toJSONShareByEmailString(String email, String accessToken, String remotePath, String[] addresses) {
         try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);
@@ -218,7 +218,18 @@ public class JSONParser {
             JSONArray jsonArr = new JSONArray(Arrays.asList(addresses));
             jsonObj.put("addresses", jsonArr);
             return jsonObj.toString();
-        }catch(JSONException e){
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+
+    public static String toJSONSpaceInfoOrBrokenConnectionsString(String email, String accessToken) {
+        try {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("email", email);
+            jsonObj.put("accessToken", accessToken);
+            return jsonObj.toString();
+        } catch (JSONException e) {
             return null;
         }
     }

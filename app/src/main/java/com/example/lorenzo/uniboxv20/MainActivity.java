@@ -73,12 +73,12 @@ public class MainActivity extends Activity {
                 LoginTask loginTask = new LoginTask() {
                     @Override
                     protected void onPostExecute(User user) {
-                        if(user != null){
+                        if (user != null) {
                             currentUser = user;
                             Intent intent = new Intent(getApplicationContext(), NavigatorActivity.class);
                             intent.putExtra("user", currentUser);
                             startActivity(intent);
-                        }else{
+                        } else {
                             Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                         }
                         loginBtn.setEnabled(true);
@@ -98,7 +98,6 @@ public class MainActivity extends Activity {
         });
 
     }// Fine onCreate
-
 
 
     @Override
