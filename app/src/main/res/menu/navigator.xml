@@ -5,4 +5,10 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
+
+    <item android:id="@+id/uploadFile"
+        android:icon="@drawable/ic_action_add_to_queue"
+        android:title="uploadFile"
+        android:showAsAction="ifRoom" />
+
 </menu>

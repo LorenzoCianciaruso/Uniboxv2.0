@@ -18,7 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-public class FileExplore extends Activity {
+public class FileExploreActivity extends Activity {
 
     // Stores names of traversed directories
     ArrayList<String> str = new ArrayList<String>();
@@ -196,7 +196,7 @@ public class FileExplore extends Activity {
                         }
                         // File picked
                         else {
-                        System.out.println(path);
+                        System.out.println(path+chosenFile);
                         }
 
                     }

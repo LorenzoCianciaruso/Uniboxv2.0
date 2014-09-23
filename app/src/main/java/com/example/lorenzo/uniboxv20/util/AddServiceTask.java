@@ -29,8 +29,7 @@ public class AddServiceTask extends AsyncTask<String, Void, String> {
         jsonRequestString = JSONParser.toJSONAddServiceString(email, accessToken, message);
         jsonResponseString = JSONParser.getJsonStringFromURL(ADD_SERVICE_URL, jsonRequestString);
 
-        //TODO da scommentare l'if quando è finito il debug
-        //   if(jsonResponseString.contains("true")){
+           if(jsonResponseString.contains("true")){
         jsonRequestString = JSONParser.toJSONAddServiceString(email, accessToken, message);
         jsonResponseString = JSONParser.getJsonStringFromURL(GET_AUTH_URL, jsonRequestString);
 
@@ -38,7 +37,7 @@ public class AddServiceTask extends AsyncTask<String, Void, String> {
             jsonResponseString = jsonResponseString.replace("\"", "").replace("\\", "");
             return jsonResponseString;
         }
-        // }
+         }
         return null;
     }
 }

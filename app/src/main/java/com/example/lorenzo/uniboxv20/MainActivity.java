@@ -57,8 +57,8 @@ public class MainActivity extends Activity {
         signupBtn = (Button) findViewById(R.id.signupButton);
 
         // ------------------------------------------------------------------------------
-        emailET.setText("lory90@gmail.com");
-        passwordET.setText("ie810eal");
+        emailET.setText("io@io.it");
+        passwordET.setText("io");
         // ------------------------------------------------------------------------------
 
         loginBtn.setOnClickListener(new View.OnClickListener() {

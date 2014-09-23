@@ -9,7 +9,7 @@ import org.json.JSONObject;
  */
 public class GetAccessTokenTask extends AsyncTask<String, Void, Boolean> {
 
-    private final String GET_ACC_TOKEN = "http://unibox.apphb.com/Services/MainService.svc/GetAccessToken";
+    private final String GET_ACC_TOKEN = "http://unibox.apphb.com/Services/MainService.svc/GetAccessTokens";
     private String jsonRequestString = "";
     private String jsonResponseString = "";
     private JSONObject jObject;

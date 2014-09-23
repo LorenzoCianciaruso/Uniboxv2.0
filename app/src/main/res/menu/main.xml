@@ -12,4 +12,14 @@
         android:title="Add Service"
         app:showAsAction="never" />
 
+    <item android:id="@+id/uploadFile"
+        android:icon="@drawable/ic_action_new"
+        android:title="uploadFile"
+        android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/createFolder"
+        android:icon="@drawable/ic_action_add_to_queue"
+        android:title="createFolder"
+        android:showAsAction="ifRoom" />
+
 </menu>

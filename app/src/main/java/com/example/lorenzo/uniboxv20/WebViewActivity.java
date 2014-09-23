@@ -114,9 +114,9 @@ public class WebViewActivity extends Activity {
                                                if (originalUrl.contains("example") && originalUrl.contains("stringa")) {
                                                    String code;
                                                    String[] splittedString = originalUrl.split("&");
-                                                   String codeField = splittedString[1];
+                                                   String codeField = splittedString[splittedString.length - 1];
                                                    String[] codeFieldSplit = codeField.split("=");
-                                                   code = splittedString[codeFieldSplit.length - 1];
+                                                   code = codeFieldSplit[codeFieldSplit.length - 1];
 
                                                    GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
                                                        @Override
@@ -136,7 +136,7 @@ public class WebViewActivity extends Activity {
                                                }
 
                                            } else if (service.equals("onedrive")) {
-                                               if (originalUrl.contains("unibox") && originalUrl.contains("code")) {
+                                               if (!originalUrl.contains("oauth")) {
                                                    String code;
                                                    String[] splittedString = originalUrl.split("=");
                                                    code = splittedString[splittedString.length - 1];
