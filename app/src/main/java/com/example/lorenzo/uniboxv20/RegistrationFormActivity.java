@@ -38,33 +38,33 @@ public class RegistrationFormActivity extends Activity {
 
         register.setOnClickListener(new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View view) {
-                        register.setEnabled(false);
-                        String[] stringArray = new String[4];
-        stringArray[0] = email.getText().toString();
-        stringArray[1] = password.getText().toString();
-        stringArray[2] = name.getText().toString();
-        stringArray[3] = surname.getText().toString();
-
-        RegisterNewAccountTask registerTask = new RegisterNewAccountTask() {
             @Override
-            protected void onPostExecute(User user) {
-                if(user != null){
-                    currentUser = user;
-                    Intent intent = new Intent(getApplicationContext(), NavigatorActivity.class);
-                    intent.putExtra("user", currentUser);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(RegistrationFormActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-                    register.setEnabled(true);
-                }
+            public void onClick(View view) {
+                register.setEnabled(false);
+                String[] stringArray = new String[4];
+                stringArray[0] = email.getText().toString();
+                stringArray[1] = password.getText().toString();
+                stringArray[2] = name.getText().toString();
+                stringArray[3] = surname.getText().toString();
+
+                RegisterNewAccountTask registerTask = new RegisterNewAccountTask() {
+                    @Override
+                    protected void onPostExecute(User user) {
+                        if (user != null) {
+                            currentUser = user;
+                            Intent intent = new Intent(getApplicationContext(), NavigatorActivity.class);
+                            intent.putExtra("user", currentUser);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(RegistrationFormActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                            register.setEnabled(true);
+                        }
+                    }
+                };
+                registerTask.execute(stringArray);
             }
-        };
-        registerTask.execute(stringArray);
+        });
     }
-});
-        }
 
 
     @Override

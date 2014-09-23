@@ -11,7 +11,7 @@ import java.io.InputStream;
 /**
  * Created by Lorenzo on 18/09/2014.
  */
-public class AddServiceTask extends AsyncTask <String, Void, String> {
+public class AddServiceTask extends AsyncTask<String, Void, String> {
 
 
     private final String ADD_SERVICE_URL = "http://unibox.apphb.com/Services/MainService.svc/AddService";
@@ -29,16 +29,16 @@ public class AddServiceTask extends AsyncTask <String, Void, String> {
         jsonRequestString = JSONParser.toJSONAddServiceString(email, accessToken, message);
         jsonResponseString = JSONParser.getJsonStringFromURL(ADD_SERVICE_URL, jsonRequestString);
 
-            //TODO da scommentare l'if quando è finito il debug
-     //   if(jsonResponseString.contains("true")){
-            jsonRequestString = JSONParser.toJSONAddServiceString(email, accessToken, message);
+        //TODO da scommentare l'if quando è finito il debug
+        //   if(jsonResponseString.contains("true")){
+        jsonRequestString = JSONParser.toJSONAddServiceString(email, accessToken, message);
         jsonResponseString = JSONParser.getJsonStringFromURL(GET_AUTH_URL, jsonRequestString);
 
-            if(jsonResponseString.contains("http")){
-                jsonResponseString = jsonResponseString.replace("\"", "").replace("\\","");
-                return jsonResponseString;
-            }
-       // }
+        if (jsonResponseString.contains("http")) {
+            jsonResponseString = jsonResponseString.replace("\"", "").replace("\\", "");
+            return jsonResponseString;
+        }
+        // }
         return null;
     }
 }

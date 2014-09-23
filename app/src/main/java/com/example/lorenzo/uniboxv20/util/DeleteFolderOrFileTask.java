@@ -29,14 +29,14 @@ public class DeleteFolderOrFileTask extends AsyncTask<String, Void, Boolean>
 
         String URL = "";
 
-        if(remotePath.contains(".")){
+        if (remotePath.contains(".")) {
             URL = DELETE_FILE_URL;
-        }else{
+        } else {
             URL = DELETE_FOLDER_URL;
         }
         jsonResponseString = JSONParser.getJsonStringFromURL(URL, jsonRequestString);
 
-        if(jsonResponseString.contains("true")){
+        if (jsonResponseString.contains("true")) {
             return true;
         }
         return false;

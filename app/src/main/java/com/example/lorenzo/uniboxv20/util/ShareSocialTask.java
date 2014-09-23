@@ -26,17 +26,17 @@ public class ShareSocialTask extends AsyncTask<String, Void, Boolean> {
 
         jsonRequestString = JSONParser.toJSONShareBySocialString(email, accessToken, remotePath);
         String URL = "";
-        if(socialSelected.equals("facebook")){
+        if (socialSelected.equals("facebook")) {
             URL = SHARE_FACEBOOK_URL;
-        }else if(socialSelected.equals("twitter")){
+        } else if (socialSelected.equals("twitter")) {
             URL = SHARE_TWITTER_URL;
-        }else if(socialSelected.equals("youtube")){
+        } else if (socialSelected.equals("youtube")) {
             URL = SHARE_YOUTUBE_URL;
         }
 
         jsonResponseString = JSONParser.getJsonStringFromURL(URL, jsonRequestString);
 
-        if(jsonResponseString.contains("true")){
+        if (jsonResponseString.contains("true")) {
             return true;
         }
         return false;

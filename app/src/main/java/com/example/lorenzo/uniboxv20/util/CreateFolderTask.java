@@ -31,9 +31,9 @@ public class CreateFolderTask extends AsyncTask<String, Void, Boolean> {
         jsonRequestString = JSONParser.toJSONCreateFolderString(email, accessToken, path, folderName);
         jsonResponseString = JSONParser.getJsonStringFromURL(URL, jsonRequestString);
 
-       if(jsonResponseString.contains("true")){
-           return true;
-       }
+        if (jsonResponseString.contains("true")) {
+            return true;
+        }
 
         return false;
     }

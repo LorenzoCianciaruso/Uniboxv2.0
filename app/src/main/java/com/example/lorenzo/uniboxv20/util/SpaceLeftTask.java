@@ -3,9 +3,11 @@ package com.example.lorenzo.uniboxv20.util;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -28,7 +30,7 @@ public class SpaceLeftTask extends AsyncTask<String, Void, ArrayList<String>> {
         jsonRequestString = JSONParser.toJSONSpaceInfoOrBrokenConnectionsString(email, accessToken);
         jsonResponseString = JSONParser.getJsonStringFromURL(AVAILABLE_SERVICES, jsonRequestString);
 
-       // if (josn)
+        // if (josn)
         //TODO restituire struttura dati
         return spaceLeft;
     }
