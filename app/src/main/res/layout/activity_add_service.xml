@@ -30,7 +30,8 @@
                 android:maxWidth="150dp"
                 android:onClick="onClick"
                 android:layout_gravity="left"
-                android:tag="dropbox"/>
+                android:tag="dropbox"
+                android:scaleType="fitCenter"/>
 
             <ImageButton
                 android:layout_width="129dp"
@@ -40,7 +41,8 @@
                 android:maxWidth="150dp"
                 android:onClick="onClick"
                 android:layout_gravity="right"
-                android:tag="box"/>
+                android:tag="box"
+                android:scaleType="fitCenter"/>
         </LinearLayout>
 
         <LinearLayout
@@ -57,7 +59,8 @@
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
                 android:onClick="onClick"
-                android:tag="mega"/>
+                android:tag="mega"
+                android:scaleType="fitCenter"/>
 
             <ImageButton
                 android:layout_width="140dp"
@@ -66,7 +69,8 @@
                 android:maxHeight="150dp"
                 android:maxWidth="150dp"
                 android:onClick="onClick"
-                android:tag="facebook"/>
+                android:tag="facebook"
+                android:scaleType="fitCenter"/>
         </LinearLayout>
 
         <LinearLayout
@@ -83,7 +87,8 @@
                 android:maxHeight="150dp"
                 android:onClick="onClick"
                 android:layout_gravity="center_horizontal"
-                android:tag="twitter"/>
+                android:tag="twitter"
+                android:scaleType="fitCenter"/>
 
             <ImageButton
                 android:layout_width="131dp"
@@ -94,7 +99,7 @@
                 android:onClick="onClick"
                 android:layout_gravity="center"
                 android:tag="youtube"
-                android:clickable="false" />
+                android:scaleType="fitCenter"/>
         </LinearLayout>
 
         <LinearLayout
@@ -114,7 +119,8 @@
                 android:maxWidth="150dp"
                 android:onClick="onClick"
                 android:layout_gravity="left"
-                android:tag="onedrive" />
+                android:tag="onedrive"
+                android:scaleType="fitCenter"/>
 
         </LinearLayout>
     </TableLayout>
