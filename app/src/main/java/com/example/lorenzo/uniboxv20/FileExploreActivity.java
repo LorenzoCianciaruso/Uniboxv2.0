@@ -18,6 +18,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.SocketException;
+
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+
+
 public class FileExploreActivity extends Activity {
 
     // Stores names of traversed directories
@@ -197,6 +206,32 @@ public class FileExploreActivity extends Activity {
                         // File picked
                         else {
                         System.out.println(path+chosenFile);
+
+                            /*
+                            DA SISTEMARE APPENA ABBIAMO L'API
+                            FTPClient mFTP = new FTPClient();
+        try {
+            // Connect to FTP Server
+            mFTP.connect("192.168.1.110");
+            mFTP.login("user", "password");
+            mFTP.setFileType(FTP.BINARY_FILE_TYPE);
+            mFTP.enterLocalPassiveMode();
+
+            // Prepare file to be uploaded to FTP Server
+            File file = new File("/path/to/filetotranfer");
+            FileInputStream ifile = new FileInputStream(file);
+
+            // Upload file to FTP Server
+            mFTP.storeFile("filetotranfer",ifile);
+            mFTP.disconnect();
+        } catch (SocketException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+                            */
                         }
 
                     }
