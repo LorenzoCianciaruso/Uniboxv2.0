@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,9 +19,13 @@ import android.widget.Toast;
 
 import com.example.lorenzo.uniboxv20.data.User;
 import com.example.lorenzo.uniboxv20.util.CreateFolderTask;
+import com.example.lorenzo.uniboxv20.util.DeleteFolderOrFileTask;
 import com.example.lorenzo.uniboxv20.util.DirectoryListAdapter;
 import com.example.lorenzo.uniboxv20.util.GetAccessTokenTask;
 import com.example.lorenzo.uniboxv20.util.GetDirectoryListTask;
+import com.example.lorenzo.uniboxv20.util.GetLinkTask;
+import com.example.lorenzo.uniboxv20.util.ShareByEmailTask;
+import com.example.lorenzo.uniboxv20.util.ShareSocialTask;
 
 import java.util.ArrayList;
 
@@ -30,6 +37,7 @@ public class NavigatorActivity extends Activity {
     private ListView listView;
     private DirectoryListAdapter arrayAdapter;
     private ArrayList<String> dirList = new ArrayList<String>();
+    private String selectedItem;
 
 
     @Override
@@ -38,7 +46,7 @@ public class NavigatorActivity extends Activity {
         setContentView(R.layout.activity_navigator);
 
         listView = (ListView) findViewById(R.id.listView);
-
+        registerForContextMenu(listView);
         currentUser = (User) getIntent().getExtras().getSerializable("user");
         GetDirectoryListTask task = new GetDirectoryListTask(currentUser) {
             @Override
@@ -71,6 +79,8 @@ public class NavigatorActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                selectedItem = adapterView.getItemAtPosition(position).toString();
 
                 // Se ho cliccato su Back
                 if (adapterView.getItemAtPosition(position).toString().equals("Back")) {
@@ -106,18 +116,21 @@ public class NavigatorActivity extends Activity {
             }
         });
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(NavigatorActivity.this, "menu", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-    }
+       /* listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-    public void onDeleteButtonClick(int position) {
-        // TODO implementare il Delete di un file/directory
-        Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view,
+                                           int position, long id) {
+                selectedItem = adapterView.getItemAtPosition(position).toString();
+                registerForContextMenu(view);
+                openContextMenu(view);
+                unregisterForContextMenu(view);
+                return true;
+            }
+        });*/
+
+
+
+
     }
 
     @Override
@@ -150,7 +163,6 @@ public class NavigatorActivity extends Activity {
             refresh();
         }
         if (id == R.id.createFolder) {
-
             //Preparing views
             LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.dialog_foldername, null);
@@ -207,6 +219,94 @@ public class NavigatorActivity extends Activity {
             }
         };
         task.execute(currentPath);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId()==R.id.listView) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_list, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = info.position;
+        selectedItem = "/" + (String) listView.getItemAtPosition(position);
+        Toast.makeText(NavigatorActivity.this, selectedItem, Toast.LENGTH_SHORT).show();
+        switch(item.getItemId()) {
+            case R.id.downloadFile:
+                return true;
+            case R.id.getLink:
+                GetLinkTask task = new GetLinkTask() {
+                    @Override
+                    protected void onPostExecute(String strings) {
+                            Toast.makeText(NavigatorActivity.this, strings, Toast.LENGTH_SHORT).show();
+                    }
+                };
+                task.execute(currentUser.getEmail(), currentUser.getAccessToken(), currentPath + selectedItem);
+                return true;
+            case R.id.delete:
+                DeleteFolderOrFileTask deleteTask = new DeleteFolderOrFileTask() {
+                    @Override
+                    protected void onPostExecute(Boolean result) {
+                        Toast.makeText(NavigatorActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                };
+                deleteTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), currentPath + selectedItem);
+                return true;
+            case R.id.shareEmail:
+                ShareByEmailTask emailTask = new ShareByEmailTask(){
+                    @Override
+                    protected void onPostExecute(Boolean result) {
+                        Toast.makeText(NavigatorActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                };
+                String[][] parameters = new String[2][];
+                String[] credentials = new String[3];
+                String[] addresses = new String [1];
+
+                credentials[0] = currentUser.getEmail();
+                credentials[1] = currentUser.getAccessToken();
+                credentials[2] = currentPath + selectedItem;
+                addresses[0] = "lory90@gmail.com";
+                parameters[0] = credentials;
+                parameters[1] = addresses;
+                emailTask.execute(credentials, addresses);
+                return true;
+            case R.id.shareFacebook:
+                ShareSocialTask socialTask = new ShareSocialTask() {
+                    @Override
+                    protected void onPostExecute(Boolean result) {
+                        Toast.makeText(NavigatorActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                };
+                socialTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), currentPath + selectedItem, "facebook");
+                return true;
+            case R.id.shareTwitter:
+                socialTask = new ShareSocialTask() {
+                    @Override
+                    protected void onPostExecute(Boolean result) {
+                        Toast.makeText(NavigatorActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                };
+                socialTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), currentPath + selectedItem, "twitter");
+                return true;
+            case R.id.shareYoutube:
+                socialTask = new ShareSocialTask() {
+                    @Override
+                    protected void onPostExecute(Boolean result) {
+                        Toast.makeText(NavigatorActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                };
+                socialTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), currentPath + selectedItem, "youtube");
+                return true;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
 

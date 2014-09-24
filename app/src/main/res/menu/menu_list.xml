@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/downloadFile"
+        android:title="Download File" />
+
+    <item android:id="@+id/getLink"
+        android:title="Get Link" />
+
+    <item android:id="@+id/delete"
+        android:title="Delete" />
+
+    <item android:id="@+id/shareEmail"
+        android:title="Share by Email" />
+
+    <item android:id="@+id/shareFacebook"
+        android:title="Share by Facebook" />
+
+    <item android:id="@+id/shareTwitter"
+        android:title="Share by Twitter" />
+
+    <item android:id="@+id/shareYoutube"
+        android:title="Share by Youtube" />
+</menu>
