@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class NavigatorActivity extends Activity {
 
     private User currentUser;
-    private String currentPath = "/";
+    private String currentPath = "";
     private ListView listView;
     private DirectoryListAdapter arrayAdapter;
     private ArrayList<String> dirList = new ArrayList<String>();
@@ -84,7 +84,6 @@ public class NavigatorActivity extends Activity {
                             setListAdapter();
                         }
                     };
-
                     // tolgo da currentPath l'ultima directory
                     String[] splittedString = currentPath.split("/");
                     currentPath = "";
@@ -92,22 +91,26 @@ public class NavigatorActivity extends Activity {
                         currentPath += splittedString[i] + "/";
                     }
                     backTask.execute(currentPath);
-
                 } else {
-
                     GetDirectoryListTask t = new GetDirectoryListTask(currentUser) {
-
                         @Override
                         protected void onPostExecute(ArrayList<String> strings) {
                             dirList = strings;
                             setListAdapter();
                         }
                     };
-
                     currentPath = currentPath + adapterView.getItemAtPosition(position).toString();
                     t.execute(currentPath);
                     currentPath += "/";
                 }
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(NavigatorActivity.this, "menu", Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
     }
@@ -142,6 +145,9 @@ public class NavigatorActivity extends Activity {
         if (id == R.id.uploadFile) {
             Intent intent = new Intent(this, FileExploreActivity.class);
             startActivity(intent);
+        }
+        if(id == R.id.refresh){
+            refresh();
         }
         if (id == R.id.createFolder) {
 
@@ -185,6 +191,22 @@ public class NavigatorActivity extends Activity {
             dialog1.show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void refresh(){
+        GetDirectoryListTask task = new GetDirectoryListTask(currentUser) {
+            @Override
+            protected void onPostExecute(ArrayList<String> strings) {
+                try {
+                    Toast.makeText(NavigatorActivity.this, strings.get(0), Toast.LENGTH_SHORT).show();
+                }catch (IndexOutOfBoundsException e){
+                    Toast.makeText(NavigatorActivity.this, "null", Toast.LENGTH_SHORT).show();
+                }
+                dirList = strings;
+                setListAdapter();
+            }
+        };
+        task.execute(currentPath);
     }
 
 
