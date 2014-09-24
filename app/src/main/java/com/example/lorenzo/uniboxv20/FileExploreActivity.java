@@ -207,7 +207,7 @@ public class FileExploreActivity extends Activity {
                         else {
                         System.out.println(path+chosenFile);
                             //TODO verificare il path
-                            File file = new File(path);
+                            File file = new File(String.valueOf(path));
                             int size = (int) file.length();
                             byte[] bytes = new byte[size];
                             try {
