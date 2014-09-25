@@ -209,7 +209,7 @@ public class FileExploreActivity extends Activity {
                         }
                         // File picked
                         else {
-                        System.out.println(path+chosenFile);
+
                             //TODO verificare il path
                             File file = new File(path+"/"+chosenFile);
                             int size = (int) file.length();
@@ -225,9 +225,11 @@ public class FileExploreActivity extends Activity {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
                             }
-                           //String data = Base64.encode(bytes, Base64.DEFAULT).toString();
+
+
                             String data = "Y2lvYW4gdmI=";
                             String remotePath = getIntent().getStringExtra("remotePath");
+                            remotePath = removeLast(remotePath);
                             User currentUser = (User) getIntent().getExtras().getSerializable("user");
                             System.out.println(data + " " + chosenFile + " " + remotePath);
                             UploadFileTask task = new UploadFileTask(){
@@ -250,6 +252,13 @@ public class FileExploreActivity extends Activity {
         }
         dialog = builder.show();
         return dialog;
+    }
+
+    private String removeLast(String str) {
+        if (str.length() > 0 && str.charAt(str.length()-1)=='/') {
+            str = str.substring(0, str.length()-1);
+        }
+        return str;
     }
 
 }

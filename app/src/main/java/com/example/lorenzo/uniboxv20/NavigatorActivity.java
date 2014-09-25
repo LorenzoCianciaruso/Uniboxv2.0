@@ -116,20 +116,6 @@ public class NavigatorActivity extends Activity {
             }
         });
 
-       /* listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view,
-                                           int position, long id) {
-                selectedItem = adapterView.getItemAtPosition(position).toString();
-                registerForContextMenu(view);
-                openContextMenu(view);
-                unregisterForContextMenu(view);
-                return true;
-            }
-        });*/
-
-
-
 
     }
 
