@@ -112,17 +112,43 @@ public class WebViewActivity extends Activity {
 
                                            } else if (service.equals("twitter")) {
 
-                                           } else if (service.equals("youtube")) {
-                                               if (originalUrl.contains("www.example.com/oauth2callback?state=stringa&code=")) {
+                                               if (originalUrl.contains("http://www.example.com/?oauth_token")) {
                                                    String code;
-                                                   String[] splittedString = originalUrl.split("&");
-                                                   String codeField = splittedString[splittedString.length - 1];
-                                                   String[] codeFieldSplit = codeField.split("=");
-                                                   code = codeFieldSplit[codeFieldSplit.length - 1];
+                                                   String[] splittedString = originalUrl.split("=");
+
+                                                   code = splittedString[2];
+                                                  // String[] strings = code.split("&");
+                                                   //String codeToUse = strings[0];
 
                                                    GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
                                                        @Override
                                                        protected void onPostExecute(Boolean response) {
+                                                           if (response) {
+                                                               Toast.makeText(WebViewActivity.this, "Access token true", Toast.LENGTH_SHORT).show();
+                                                           } else {
+                                                               Toast.makeText(WebViewActivity.this, "Access token false", Toast.LENGTH_SHORT).show();
+                                                           }
+                                                       }
+                                                   };
+                                                   getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code, "", "");
+                                                   //Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
+                                                   // intent.putExtra("user", currentUser);
+                                                   //startActivity(intent);
+                                                   finish();
+                                               }
+
+                                           } else if (service.equals("youtube")) {
+                                               if (originalUrl.contains("www.example.com/oauth2callback?state=stringa&code=")&& control==true) {
+                                                           control=false;
+                                                           String code;
+                                                           String[] splittedString = originalUrl.split("&");
+                                                           String codeField = splittedString[splittedString.length - 1];
+                                                           String[] codeFieldSplit = codeField.split("=");
+                                                           code = codeFieldSplit[codeFieldSplit.length - 1];
+
+                                                           GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
+                                                               @Override
+                                                               protected void onPostExecute(Boolean response) {
                                                            if (response) {
                                                                Toast.makeText(WebViewActivity.this, "Access token true", Toast.LENGTH_SHORT).show();
                                                            } else {

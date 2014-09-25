@@ -225,7 +225,8 @@ public class FileExploreActivity extends Activity {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
                             }
-                           String data = Base64.encodeToString(bytes, Base64.DEFAULT);
+                           //String data = Base64.encode(bytes, Base64.DEFAULT).toString();
+                            String data = "Y2lvYW4gdmI=";
                             String remotePath = getIntent().getStringExtra("remotePath");
                             User currentUser = (User) getIntent().getExtras().getSerializable("user");
                             System.out.println(data + " " + chosenFile + " " + remotePath);
