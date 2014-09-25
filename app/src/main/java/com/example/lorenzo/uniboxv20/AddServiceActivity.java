@@ -165,9 +165,9 @@ public class AddServiceActivity extends Activity {
                                         if (result1) {
                                             Toast.makeText(AddServiceActivity.this, "AccToken mega OK", Toast.LENGTH_SHORT).show();
                                             dialog.dismiss();
-                                            Intent intent = new Intent(AddServiceActivity.this, NavigatorActivity.class);
-                                            intent.putExtra("user", currentUser);
-                                            startActivity(intent);
+                                            //Intent intent = new Intent(AddServiceActivity.this, NavigatorActivity.class);
+                                           //intent.putExtra("user", currentUser);
+                                           // startActivity(intent);
                                         } else {
                                             Toast.makeText(AddServiceActivity.this, "false", Toast.LENGTH_SHORT).show();
                                         }

@@ -94,12 +94,25 @@ public class NavigatorActivity extends Activity {
                             setListAdapter();
                         }
                     };
-                    // tolgo da currentPath l'ultima directory
-                    String[] splittedString = currentPath.split("/");
-                    currentPath = "";
-                    for (int i = 0; i < splittedString.length - 2; i++) {
-                        currentPath += splittedString[i] + "/";
+
+                    int index = currentPath.lastIndexOf("/");
+                    if(index==0){
+                        currentPath="/";
+                    }else {
+
+                        currentPath = currentPath.substring(0, currentPath.length() - 2);
+
+                        index = currentPath.lastIndexOf("/");
+                        currentPath = currentPath.substring(0, index);
+
                     }
+
+                    // tolgo da currentPath l'ultima directory
+                   /* String[] splittedString = currentPath.split("/");
+                    currentPath = "/";
+                    for (int i = 1; i < splittedString.length - 2; i++) {
+                        currentPath += splittedString[i] + "/";
+                    }*/
                     backTask.execute(currentPath);
                 } else {
                     GetDirectoryListTask t = new GetDirectoryListTask(currentUser) {
@@ -297,5 +310,11 @@ public class NavigatorActivity extends Activity {
         }
     }
 
+    private String removeLast(String str) {
+        if (str.length() > 0 && str.charAt(str.length()-1)=='x') {
+            str = str.substring(0, str.length()-1);
+        }
+        return str;
+    }
 
 }
