@@ -226,8 +226,18 @@ public class FileExploreActivity extends Activity {
                                 e.printStackTrace();
                             }
 
-                            //String data = Base64.encode(bytes, Base64.NO_WRAP).toString();
-                            String data = "ZmlsZSBkaSBwcm92YQ==";
+                            String data = Base64.encodeToString(bytes, Base64.URL_SAFE);
+                            /*
+                            if(data.length()%4 ==1){
+                                data = data+"===";
+                            }
+                            if(data.length()%4 ==2){
+                                data = data+"==";
+                            }
+                            if(data.length()%4 ==3){
+                                data = data+"=";
+                            }*/
+                            //String data = "Y2lvYW4gdmI=";
                             String remotePath = getIntent().getStringExtra("remotePath");
                             remotePath = removeLast(remotePath);
                             User currentUser = (User) getIntent().getExtras().getSerializable("user");
