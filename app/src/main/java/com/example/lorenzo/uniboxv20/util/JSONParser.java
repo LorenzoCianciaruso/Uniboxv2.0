@@ -172,19 +172,6 @@ public class JSONParser {
         }
     }
 
-    public static String toJSONUploadFileString(String email, String accessToken, String localPath, String remotePath) {
-        try {
-            JSONObject jsonObj = new JSONObject();
-            jsonObj.put("email", email);
-            jsonObj.put("accessToken", accessToken);
-            jsonObj.put("localPath", localPath);
-            jsonObj.put("remotePath", remotePath);
-            return jsonObj.toString();
-        } catch (JSONException e) {
-            return null;
-        }
-    }
-
     public static String toJSONDeleteFileOrDeleteFolderString(String email, String accessToken, String remotePath) {
         try {
             JSONObject jsonObj = new JSONObject();
@@ -235,7 +222,7 @@ public class JSONParser {
     }
 
 
-    public static String toJSONUploadFile(String email, String accessToken, String data, String name, String path) {
+    public static String toJSONUploadFileString(String email, String accessToken, String data, String name, String path) {
         try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("email", email);

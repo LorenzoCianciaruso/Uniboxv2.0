@@ -28,7 +28,7 @@ public class UploadFileTask extends AsyncTask<String, Void, Boolean> {
         String name = strings[3];
         String path = strings[4];
 
-        jsonRequestString = JSONParser.toJSONAUploadFIle(email, accessToken, data, name, path);
+        jsonRequestString = JSONParser.toJSONUploadFileString(email, accessToken, data, name, path);
         jsonResponseString = JSONParser.getJsonStringFromURL(UPLOAD_FILE, jsonRequestString);
 
         if (jsonResponseString.contains("true")) {
