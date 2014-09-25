@@ -49,31 +49,38 @@ public class AddServiceActivity extends Activity {
                     Toast.makeText(AddServiceActivity.this, "null", Toast.LENGTH_SHORT).show();
                 }
 
-                if (availableServices.contains("Dropbox")) {
+                //if (availableServices.contains("Dropbox")) {
+                if(true){
                     imageButton[0].setImageResource(R.drawable.dropbox);
                     imageButton[0].setEnabled(true);
                 }
-                if (availableServices.contains("Box")) {
+               // if (availableServices.contains("Box")) {
+                    if(true){
                     imageButton[1].setImageResource(R.drawable.box);
                     imageButton[1].setEnabled(true);
                 }
-                if (availableServices.contains("Mega")) {
+                //if (availableServices.contains("Mega")) {
+                    if(true){
                     imageButton[2].setImageResource(R.drawable.mega);
                     imageButton[2].setEnabled(true);
                 }
-                if (availableServices.contains("Facebook")) {
+                //if (availableServices.contains("Facebook")) {
+                if(true){
                     imageButton[3].setImageResource(R.drawable.facebook);
                     imageButton[3].setEnabled(true);
                 }
-                if (availableServices.contains("Twitter")) {
+                //if (availableServices.contains("Twitter")) {
+                if(true){
                     imageButton[4].setImageResource(R.drawable.twitter);
                     imageButton[4].setEnabled(true);
                 }
-                if (availableServices.contains("Youtube")) {
+                //if (availableServices.contains("Youtube")) {
+                if(true){
                     imageButton[5].setImageResource(R.drawable.youtube);
                     imageButton[5].setEnabled(true);
                 }
-                if (availableServices.contains("OneDrive")) {
+                //if (availableServices.contains("OneDrive")) {
+                if(true){
                     imageButton[6].setImageResource(R.drawable.onedrive);
                     imageButton[6].setEnabled(true);
                 }
@@ -194,11 +201,11 @@ public class AddServiceActivity extends Activity {
                         intent.putExtra("user", currentUser);
                         startActivity(intent);
                     }
-
                 }
             };
             serviceTask.execute(stringArray);
         }
+        //finish();
     }
 
 }

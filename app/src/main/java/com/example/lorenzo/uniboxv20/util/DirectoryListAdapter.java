@@ -40,7 +40,7 @@ public class DirectoryListAdapter extends ArrayAdapter<String> {
 
             TextView dirTextView = (TextView) view
                     .findViewById(R.id.listTextView);
-            Button deleteBtn = (Button) view.findViewById((R.id.deleteButton));
+           // Button deleteBtn = (Button) view.findViewById((R.id.deleteButton));
 
             // setto il titolo
             if (dirTextView != null) {
@@ -48,7 +48,7 @@ public class DirectoryListAdapter extends ArrayAdapter<String> {
             }
 
             // setto l'immagine
-            if (deleteBtn != null) {
+           /* if (deleteBtn != null) {
                 if (item.equals("Back")) {
                     deleteBtn.setVisibility(View.GONE);
                     return view;
@@ -59,7 +59,7 @@ public class DirectoryListAdapter extends ArrayAdapter<String> {
                         ((NavigatorActivity) context).onDeleteButtonClick(position);
                     }
                 });
-            }
+            }*/
         }
         return view;
     }

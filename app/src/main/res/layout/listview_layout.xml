@@ -9,7 +9,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:longClickable="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -17,22 +18,18 @@
             android:id="@+id/listTextView"
             android:layout_gravity="center_horizontal"
             android:ellipsize="marquee"
+            android:textSize="24dp"
             android:singleLine="true" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:gravity="right"
         android:layout_gravity="right">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/delete"
-            android:id="@+id/deleteButton"
-            android:layout_gravity="right" />
+
     </LinearLayout>
 
 </LinearLayout>

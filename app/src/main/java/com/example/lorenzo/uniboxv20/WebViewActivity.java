@@ -54,14 +54,13 @@ public class WebViewActivity extends Activity {
                                                        }
                                                    };
                                                    getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, "", "", "");
-                                                   Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
-                                                   intent.putExtra("user", currentUser);
-                                                   startActivity(intent);
+                                                  // Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
+                                                  // intent.putExtra("user", currentUser);
+                                                  // startActivity(intent);
                                                    finish();
                                                }
                                            } else if (service.equals("box")) {
-                                               //problema localhost
-                                               if (originalUrl.contains("localhost")) {
+                                               if (originalUrl.contains("https://www.google.it/?state=security_token") && originalUrl.contains("code")) {
                                                    String code;
                                                    String[] splittedString = originalUrl.split("=");
 
@@ -78,18 +77,19 @@ public class WebViewActivity extends Activity {
                                                        }
                                                    };
                                                    getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code, "", "");
-                                                   Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
-                                                   intent.putExtra("user", currentUser);
-                                                   startActivity(intent);
+                                                   //Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
+                                                  // intent.putExtra("user", currentUser);
+                                                  // startActivity(intent);
                                                    finish();
                                                }
 
                                            } else if (service.equals("facebook")) {
-                                               if (originalUrl.contains("code")) {
+                                               //problema qui da risolvere
+                                               if (originalUrl.contains("http://www.example.com/?code=")) {
                                                    String code;
                                                    String[] splittedString = originalUrl.split("code");
 
-                                                   code = splittedString[splittedString.length - 1];
+                                                   code = splittedString[1];
                                                    code = code.replaceFirst("=", "");
 
                                                    GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
@@ -103,9 +103,9 @@ public class WebViewActivity extends Activity {
                                                        }
                                                    };
                                                    getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code, "", "");
-                                                   Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
-                                                   intent.putExtra("user", currentUser);
-                                                   startActivity(intent);
+                                                   //Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
+                                                  // intent.putExtra("user", currentUser);
+                                                   //startActivity(intent);
                                                    finish();
                                                }
 
@@ -130,9 +130,9 @@ public class WebViewActivity extends Activity {
                                                        }
                                                    };
                                                    getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code, "", "");
-                                                   Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
-                                                   intent.putExtra("user", currentUser);
-                                                   startActivity(intent);
+                                                  // Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
+                                                  // intent.putExtra("user", currentUser);
+                                                  // startActivity(intent);
                                                    finish();
                                                }
 
@@ -153,9 +153,9 @@ public class WebViewActivity extends Activity {
                                                        }
                                                    };
                                                    getAccessTokenTask.execute(currentUser.getEmail(), currentUser.getAccessToken(), service, code, "", "");
-                                                   Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
-                                                   intent.putExtra("user", currentUser);
-                                                   startActivity(intent);
+                                                   //Intent intent = new Intent(WebViewActivity.this, NavigatorActivity.class);
+                                                   //intent.putExtra("user", currentUser);
+                                                   //startActivity(intent);
                                                    finish();
                                                }
                                            }

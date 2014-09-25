@@ -32,9 +32,6 @@ import static org.apache.http.util.EntityUtils.toByteArray;
 
 public class FileExploreActivity extends Activity {
 
-    private User currentUser;
-
-
     // Stores names of traversed directories
     ArrayList<String> str = new ArrayList<String>();
 
@@ -54,6 +51,7 @@ public class FileExploreActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         loadFileList();
 
         showDialog(DIALOG_LOAD_FILE);
@@ -212,7 +210,7 @@ public class FileExploreActivity extends Activity {
                         else {
                         System.out.println(path+chosenFile);
                             //TODO verificare il path
-                            File file = new File(path+chosenFile);
+                            File file = new File(path);
                             int size = (int) file.length();
                             byte[] bytes = new byte[size];
                             try {
