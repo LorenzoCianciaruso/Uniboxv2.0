@@ -227,6 +227,15 @@ public class FileExploreActivity extends Activity {
                             }
 
                             String data = Base64.encode(bytes, Base64.NO_PADDING).toString();
+                            if(data.length()%4 ==1){
+                                data = data+"===";
+                            }
+                            if(data.length()%4 ==2){
+                                data = data+"==";
+                            }
+                            if(data.length()%4 ==3){
+                                data = data+"=";
+                            }
                             //String data = "Y2lvYW4gdmI=";
                             String remotePath = getIntent().getStringExtra("remotePath");
                             remotePath = removeLast(remotePath);
