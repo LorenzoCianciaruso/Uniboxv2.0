@@ -235,4 +235,19 @@ public class JSONParser {
     }
 
 
+    public static String toJSONUploadFile(String email, String accessToken, String data, String name, String path) {
+        try {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("email", email);
+            jsonObj.put("accessToken", accessToken);
+            jsonObj.put("data", data);
+            jsonObj.put("fileName", name);
+            jsonObj.put("remotePath", accessToken);
+
+            return jsonObj.toString();
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+
 }

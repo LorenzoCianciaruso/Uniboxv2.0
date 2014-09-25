@@ -24,10 +24,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.example.lorenzo.uniboxv20.data.User;
+import com.example.lorenzo.uniboxv20.util.UploadFileTask;
+
 import static org.apache.http.util.EntityUtils.toByteArray;
 
 
 public class FileExploreActivity extends Activity {
+
+    private User currentUser;
+
 
     // Stores names of traversed directories
     ArrayList<String> str = new ArrayList<String>();
@@ -48,7 +54,6 @@ public class FileExploreActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         loadFileList();
 
         showDialog(DIALOG_LOAD_FILE);
@@ -207,7 +212,7 @@ public class FileExploreActivity extends Activity {
                         else {
                         System.out.println(path+chosenFile);
                             //TODO verificare il path
-                            File file = new File(path);
+                            File file = new File(path+chosenFile);
                             int size = (int) file.length();
                             byte[] bytes = new byte[size];
                             try {
@@ -221,7 +226,12 @@ public class FileExploreActivity extends Activity {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
                             }
-                            Base64.encode(bytes, Base64.DEFAULT);
+                            String data = Base64.encodeToString(bytes, Base64.DEFAULT);
+                            currentUser = (User) getIntent().getExtras().getSerializable("user");
+                            UploadFileTask task = new UploadFileTask();
+                            task.execute(currentUser.getEmail(), currentUser.getAccessToken(), data, chosenFile, "/");
+
+
                         }
                     }
                 });
