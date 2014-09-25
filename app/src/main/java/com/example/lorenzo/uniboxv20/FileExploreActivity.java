@@ -226,8 +226,8 @@ public class FileExploreActivity extends Activity {
                                 e.printStackTrace();
                             }
 
-
-                            String data = "Y2lvYW4gdmI=";
+                            String data = Base64.encode(bytes, Base64.NO_PADDING).toString();
+                            //String data = "Y2lvYW4gdmI=";
                             String remotePath = getIntent().getStringExtra("remotePath");
                             remotePath = removeLast(remotePath);
                             User currentUser = (User) getIntent().getExtras().getSerializable("user");
