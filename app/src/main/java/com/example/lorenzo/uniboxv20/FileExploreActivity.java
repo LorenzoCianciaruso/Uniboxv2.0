@@ -226,7 +226,8 @@ public class FileExploreActivity extends Activity {
                                 e.printStackTrace();
                             }
 
-                            String data = Base64.encode(bytes, Base64.NO_PADDING).toString();
+                            String data = Base64.encodeToString(bytes, Base64.URL_SAFE);
+                            /*
                             if(data.length()%4 ==1){
                                 data = data+"===";
                             }
@@ -235,7 +236,7 @@ public class FileExploreActivity extends Activity {
                             }
                             if(data.length()%4 ==3){
                                 data = data+"=";
-                            }
+                            }*/
                             //String data = "Y2lvYW4gdmI=";
                             String remotePath = getIntent().getStringExtra("remotePath");
                             remotePath = removeLast(remotePath);
