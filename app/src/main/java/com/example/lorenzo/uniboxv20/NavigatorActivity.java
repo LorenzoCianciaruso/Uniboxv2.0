@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class NavigatorActivity extends Activity {
 
     private User currentUser;
-    private String currentPath = "";
+    private String currentPath = "/";
     private ListView listView;
     private DirectoryListAdapter arrayAdapter;
     private ArrayList<String> dirList = new ArrayList<String>();
@@ -157,6 +157,8 @@ public class NavigatorActivity extends Activity {
         }
         if (id == R.id.uploadFile) {
             Intent intent = new Intent(this, FileExploreActivity.class);
+            intent.putExtra("user", currentUser);
+            intent.putExtra("remotePath", currentPath);
             startActivity(intent);
         }
         if(id == R.id.refresh){

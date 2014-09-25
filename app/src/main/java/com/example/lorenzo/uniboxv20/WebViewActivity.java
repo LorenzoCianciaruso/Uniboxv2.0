@@ -18,6 +18,7 @@ public class WebViewActivity extends Activity {
 
     private String service;
     private User currentUser;
+    private boolean control = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,11 +138,13 @@ public class WebViewActivity extends Activity {
                                                }
 
                                            } else if (service.equals("onedrive")) {
-                                               if (!originalUrl.contains("oauth")) {
+                                               if (originalUrl.contains("https://www.unibox.com/?code") && control==true) {
+                                                    control=false;
                                                    String code;
                                                    String[] splittedString = originalUrl.split("=");
-                                                   code = splittedString[splittedString.length - 1];
-
+                                                   code = splittedString[1];
+                                                   originalUrl="";
+                                                   System.out.println("CCCC "+code);
                                                    GetAccessTokenTask getAccessTokenTask = new GetAccessTokenTask() {
                                                        @Override
                                                        protected void onPostExecute(Boolean response) {

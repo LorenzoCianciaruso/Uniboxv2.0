@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lorenzo.uniboxv20.data.User;
 import com.example.lorenzo.uniboxv20.util.UploadFileTask;
@@ -210,7 +211,7 @@ public class FileExploreActivity extends Activity {
                         else {
                         System.out.println(path+chosenFile);
                             //TODO verificare il path
-                            File file = new File(path);
+                            File file = new File(path+"/"+chosenFile);
                             int size = (int) file.length();
                             byte[] bytes = new byte[size];
                             try {
@@ -224,10 +225,21 @@ public class FileExploreActivity extends Activity {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
                             }
-                            String data = Base64.encodeToString(bytes, Base64.DEFAULT);
-                            currentUser = (User) getIntent().getExtras().getSerializable("user");
-                            UploadFileTask task = new UploadFileTask();
-                            task.execute(currentUser.getEmail(), currentUser.getAccessToken(), data, chosenFile, "/");
+                           String data = Base64.encodeToString(bytes, Base64.DEFAULT);
+                            String remotePath = getIntent().getStringExtra("remotePath");
+                            User currentUser = (User) getIntent().getExtras().getSerializable("user");
+                            System.out.println(data + " " + chosenFile + " " + remotePath);
+                            UploadFileTask task = new UploadFileTask(){
+                                @Override
+                            protected void onPostExecute(Boolean result){
+                                    if (result){
+                                        Toast.makeText(FileExploreActivity.this, "true", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        Toast.makeText(FileExploreActivity.this, "false", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            };
+                            task.execute(currentUser.getEmail(), currentUser.getAccessToken(), data, chosenFile, remotePath);
 
 
                         }

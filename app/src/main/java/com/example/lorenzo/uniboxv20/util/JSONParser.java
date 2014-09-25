@@ -229,7 +229,7 @@ public class JSONParser {
             jsonObj.put("accessToken", accessToken);
             jsonObj.put("data", data);
             jsonObj.put("fileName", name);
-            jsonObj.put("remotePath", accessToken);
+            jsonObj.put("remotePath", path);
 
             return jsonObj.toString();
         } catch (JSONException e) {

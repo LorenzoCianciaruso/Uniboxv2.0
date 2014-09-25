@@ -177,7 +177,6 @@ public class AddServiceActivity extends Activity {
                         }
                     };
                     addServiceTask.execute(currentUser.getEmail(),currentUser.getAccessToken(),message);
-
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -188,9 +187,7 @@ public class AddServiceActivity extends Activity {
             });
             AlertDialog dialog = builder.create();
             dialog.show();
-
         } else {
-
             AddServiceTask serviceTask = new AddServiceTask() {
                 @Override
                 protected void onPostExecute(String result) {
