@@ -146,8 +146,10 @@ public class NavigatorActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.logout) {
+            Intent intent = new Intent(NavigatorActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
         if (id == R.id.action_add_service) {
             Intent intent = new Intent(this, AddServiceActivity.class);
@@ -210,11 +212,7 @@ public class NavigatorActivity extends Activity {
         GetDirectoryListTask task = new GetDirectoryListTask(currentUser) {
             @Override
             protected void onPostExecute(ArrayList<String> strings) {
-                try {
-                    Toast.makeText(NavigatorActivity.this, strings.get(0), Toast.LENGTH_SHORT).show();
-                }catch (IndexOutOfBoundsException e){
-                    Toast.makeText(NavigatorActivity.this, "null", Toast.LENGTH_SHORT).show();
-                }
+
                 dirList = strings;
                 setListAdapter();
             }
@@ -236,7 +234,6 @@ public class NavigatorActivity extends Activity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int position = info.position;
         selectedItem = "/" + (String) listView.getItemAtPosition(position);
-        Toast.makeText(NavigatorActivity.this, selectedItem, Toast.LENGTH_SHORT).show();
         switch(item.getItemId()) {
             case R.id.downloadFile:
                 return true;
@@ -310,11 +307,5 @@ public class NavigatorActivity extends Activity {
         }
     }
 
-    private String removeLast(String str) {
-        if (str.length() > 0 && str.charAt(str.length()-1)=='x') {
-            str = str.substring(0, str.length()-1);
-        }
-        return str;
-    }
 
 }
